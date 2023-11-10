@@ -7,7 +7,7 @@ import { FaChessKing,FaChessQueen, FaChessBishop,
     from 'react-icons/fa';
 
 const Piece = ({piece}: {piece:PieceType}) => {
-    switch(piece.title){
+    switch(piece?.title){
         case 'king': 
             return <FaChessKing className="piece" data-color={piece.color}/>
         case 'queen':
@@ -21,7 +21,7 @@ const Piece = ({piece}: {piece:PieceType}) => {
         case 'pawn':
             return <FaChessPawn className="piece" data-color={piece.color}/>
         default:
-            return <span className="piece" data-color={piece.color}>NA</span>;
+            return <span className="piece" data-color={piece?.color}>NA</span>;
     }
 }
 

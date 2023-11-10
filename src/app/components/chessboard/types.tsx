@@ -1,7 +1,7 @@
 export type PieceType = {
     title: string,
     color: string,
-}
+} | null;
 
 export type Coords = {
     x: number,
@@ -9,3 +9,7 @@ export type Coords = {
 }
 
 export type BoardType = Array<Array<PieceType>>;
+
+export type mouseEvent = {
+    preventDefault : () => {}
+};

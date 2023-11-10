@@ -1,0 +1,48 @@
+
+.statusbar {
+    box-shadow: 1px 1px 5px white;
+    z-index:101;
+    top:5rem;
+    left:5rem;
+    @apply absolute flex flex-row lg:flex-col p-2 bg-black rounded-xl gap-2;
+}
+
+@media screen and (max-width:1000px){
+    .statusbar {
+        top: 34rem;
+        left: 10rem;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .statusbar {
+        flex-direction: row;
+    }
+}
+
+@media screen and (max-width:700px){
+    .statusbar {
+        top: 30rem;
+        left:auto;
+    }
+}
+
+.player-turn {
+    @apply px-4 py-3 rounded md:text-lg bg-white text-center;
+}
+
+.active {
+    @apply bg-green-600 text-white;
+}
+
+.game-result {
+    @apply px-4 py-4 bg-transparent rounded text-xl text-white hidden;
+}
+
+.visible {
+    @apply block;
+}
+
+.reset {
+    @apply px-4 py-2 text-white font-bold text-xl flex justify-center items-center gap-3;
+}
