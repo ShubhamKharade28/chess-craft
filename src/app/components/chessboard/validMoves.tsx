@@ -1,4 +1,4 @@
-import { BoardType,Coords } from "./types";
+import { BoardType,Coords } from "../../types/types";
 
 export const getBlackPawnMoves = (board:BoardType, row:number, col:number) => {
     const validMoves:Array<Coords> = [];

@@ -1,4 +1,4 @@
-import { BoardType } from "./types";
+import { BoardType } from "../../types/types";
 
 export const isInCheck = (board: BoardType,color: string):boolean => {
     let kingPos = [-1,-1];

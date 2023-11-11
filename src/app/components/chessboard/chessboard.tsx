@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import './chessboard.css';
 import getInitialBoard from './initialBoard';
@@ -7,20 +7,21 @@ import { isValidMove, getBlackPawnMoves,
     getKnightMoves, getBishopMoves, getRookMoves, getQueenMoves,
      getKingMoves, getWhitePawnMoves, } from './validMoves';
 import Piece from '../piece/piece';
-import { PieceType, Coords } from './types';
-import StatusBar from '../status/status';
+import { PieceType, ChessBoardPropsTypes } from '../../types/types';
 import { isInCheck } from './inCheck';
 
-const Board = () => {
-    
-    const [chessboard, setChessboard] = useState<Array<Array<PieceType>>>([]);
-    const [validMoves, setValidMoves] = useState<Array<Coords>>([]);
-    const [isMoving, setIsMoving] = useState(false);
-    const [curr, setCurr] = useState<Coords>({x:-1,y:-1});
-    const [currPlayer, setCurrPlayer] = useState(true);
-    const [winner, setWinner] = useState<string | null>(null);
-    const [isBlackInCheck, setBlackInCheck] = useState(false);
-    const [isWhiteInCheck, setWhiteInCheck] = useState(false);
+const Board = ({chessboard, setChessboard, 
+    validMoves, setValidMoves,
+    isMoving, setIsMoving,
+    curr, setCurr,
+    currPlayer, setCurrPlayer,
+    winner, setWinner,
+    isBlackInCheck, setBlackInCheck,
+    isWhiteInCheck, setWhiteInCheck,
+    role,
+    emitBlackInCheckState, emitBoardState, emitCurrPlayerState, emitCurrPosState,
+    emitWhiteInCheckState, emitWinnerState
+    } : ChessBoardPropsTypes) => {
 
     useEffect(() => {
         initializeBoard();
@@ -31,20 +32,13 @@ const Board = () => {
         setChessboard(board);
     }
 
-    const reset = () => {
-        setChessboard(getInitialBoard());
-        setCurrPlayer(true);
-        setIsMoving(false);
-        setCurr({x:-1,y:-1});
-        setValidMoves([]);
-        setWinner(null);
-        setWhiteInCheck(false);
-        setBlackInCheck(false);
-    }
-
     const showMoves = (row:number, col:number, piece:PieceType) => {
         if(winner) return;
         // if clicked again on same
+
+        if(currPlayer && role !== 'black') return;
+        if(!currPlayer && role === 'black') return;
+
         if(isMoving && curr.x == row && curr.y === col){
             setValidMoves([]);
             setIsMoving(false);
@@ -53,12 +47,12 @@ const Board = () => {
 
         // is black in check
         if(currPlayer && isInCheck(chessboard,'black')){
-            setBlackInCheck(true);
+            emitBlackInCheckState(true);
         }
 
         // is white in check
         if(!currPlayer && isInCheck(chessboard,'white')){
-            setWhiteInCheck(true);
+            emitWhiteInCheckState(true);
         }
 
         // if clicked on valid move, redirect to move function
@@ -82,7 +76,7 @@ const Board = () => {
             return;
         }
         // get valid moves for piece
-        setCurr({x:row,y:col});
+        emitCurrPosState({x: row, y: col});
         let color = piece.color;
         let title = piece.title;
         switch(title){
@@ -133,29 +127,34 @@ const Board = () => {
                 
                 if(currPlayer && isInCheck(board,'black')){
                     setBlackInCheck(true);
+                    emitBoardState(prev);
                     return prev;
-                }else setBlackInCheck(false);
+                }else emitBlackInCheckState(false);
 
                 if(!currPlayer && isInCheck(board,'white')){
-                    setWhiteInCheck(true);
+                    emitWhiteInCheckState(true);
                     return prev;
-                }else setBlackInCheck(false);
+                }else emitBlackInCheckState(false);
 
                 if(prevPiece?.title === 'king'){
                     let wnr = prevPiece.color === 'black' ? 'white' : 'black';
-                    setWinner(wnr);
+                    emitWinnerState(wnr);
                 }
+
+                emitBoardState(board);
                 return board;
-            })
+            });
+            emitBoardState(chessboard);
         }
         setValidMoves([]);
         setIsMoving(false);
-        setCurrPlayer(!currPlayer);
+        emitCurrPlayerState(!currPlayer);
     }
 
+    const isReverse = (role === 'black');
+
     return (
-        <div className="board">
-            <StatusBar winner={winner} currPlayer={currPlayer} reset={reset}/>
+        <div className={isReverse ? "board reverse": "board normal" }>
             {chessboard.map((row, rowIndex) => (
                 <div key={rowIndex} className="row">
                     {row.map((piece, colIndex) => {

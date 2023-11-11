@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { socket } from "./socket-client";
+import { socket } from "../../lib/socket/socket-client";
 
 const SendMessage = () => {
     const [isConnected, setIsConnected] = useState(socket.connected);

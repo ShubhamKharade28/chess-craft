@@ -3,5 +3,33 @@
 @tailwind utilities;
 
 :root {
-  @apply h-screen w-screen;
+  @apply h-screen w-screen overflow-scroll;
+}
+
+:root::-webkit-scrollbar {
+  display: none;
+}
+
+h6 {
+  @apply text-lg;
+}
+
+h5 {
+  @apply text-xl;
+}
+
+h4 {
+  @apply text-2xl;
+}
+
+h3 {
+  @apply text-3xl;
+}
+
+h2 {
+  @apply text-4xl;
+}
+
+h1 {
+  @apply text-5xl;
 }

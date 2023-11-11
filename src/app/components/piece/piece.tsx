@@ -1,5 +1,5 @@
 "use client";
-import { PieceType } from "../chessboard/types";
+import { PieceType } from "../../types/types";
 import './piece.css';
 
 import { FaChessKing,FaChessQueen, FaChessBishop,

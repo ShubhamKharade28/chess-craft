@@ -1,7 +1,15 @@
 .board {
-    box-shadow: 3px 3px 20px black;
+    box-shadow: 1px 1px 10px white;
     border: 2px solid white;
-    @apply overflow-hidden flex flex-col-reverse rounded-lg;
+    @apply overflow-hidden flex rounded-lg;
+}
+
+.board.normal {
+    @apply flex-col;
+}
+
+.board.reverse {
+    @apply flex-col-reverse;
 }
 
 .row {
@@ -18,8 +26,11 @@
 
 @media screen and (max-width:700px){
     .square {
-        width: 3rem;
-        height: 3rem;
+        width: 3.6rem;
+        height: 3.6rem;
+    }
+    .board {
+        box-shadow: 0px 0px 10px black;
     }
 }
 
@@ -31,7 +42,7 @@
 }
 
 .black {
-    @apply bg-black;
+    background-color: rgb(54, 53, 53);
 }
 
 .white {
@@ -46,19 +57,18 @@
     @apply bg-red-900;
 }
 
-
 .green-dot {
     left: 1.3rem;
     top: 1.26rem;
     z-index: 10;
-    box-shadow: 0px 0px 10px rgba(172, 255, 47);
+    box-shadow: 0px 0px 5px rgba(172, 255, 47);
     @apply absolute bg-green-500 bg-opacity-80 h-6 w-6 rounded-full;
 }
 
 @media screen and (max-width:700px) {
     .green-dot {
-        left: 1rem;
-        top: 1rem;
+        left: 1.15rem;
+        top: 1.15rem;
         @apply h-5 w-5;
     }
 }

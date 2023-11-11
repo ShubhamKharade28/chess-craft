@@ -10,8 +10,8 @@
 
 @media screen and (max-width:700px) {
     .piece {
-        top:0.5rem;
-        left: 0.5rem;
+        top:0.65rem;
+        left: 0.7rem;
         width: 1.9rem;
         height: 1.9rem;
     }
@@ -25,11 +25,11 @@
 }
 
 .piece[data-color="white"] {
-    @apply text-white;
+    color: rgb(223, 221, 221);
     filter: drop-shadow(0px 0px 2px black);
 }
 
 .piece[data-color="black"] {
-    @apply text-black;
+    color: black;
     filter: drop-shadow(0px 0px 2px white);
 }

@@ -1,34 +1,11 @@
 
 .statusbar {
     box-shadow: 1px 1px 5px white;
-    z-index:101;
-    top:5rem;
-    left:5rem;
-    @apply absolute flex flex-row lg:flex-col p-2 bg-black rounded-xl gap-2;
-}
-
-@media screen and (max-width:1000px){
-    .statusbar {
-        top: 34rem;
-        left: 10rem;
-    }
-}
-
-@media screen and (max-width: 800px){
-    .statusbar {
-        flex-direction: row;
-    }
-}
-
-@media screen and (max-width:700px){
-    .statusbar {
-        top: 30rem;
-        left:auto;
-    }
+    @apply flex flex-row md:flex-col p-2 bg-black rounded-xl gap-2;
 }
 
 .player-turn {
-    @apply px-4 py-3 rounded md:text-lg bg-white text-center;
+    @apply px-3 py-2 rounded md:text-lg bg-white text-center;
 }
 
 .active {

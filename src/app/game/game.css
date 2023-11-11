@@ -1,0 +1,9 @@
+.game {
+    background: rgb(47, 50, 63);
+    @apply
+    flex flex-col md:flex-row gap-6 md:gap-10 justify-center items-center h-screen overflow-scroll w-full p-3;
+}
+
+.game::-webkit-scrollbar {
+    @apply hidden;
+}
